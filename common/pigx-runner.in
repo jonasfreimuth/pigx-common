@@ -279,6 +279,8 @@ def generate_cluster_configuration():
               }
         elif ( 'queue' in rules[rule] ):
             # --- User has supplied a queue for this specific rule.
+            if not 'queue' in rules['__default__']:
+                bail("ERROR: submission queue specified per rule with no default.")
             cluster_conf[rule] = {
               'nthreads': rules[rule]['threads'],
               'MEM':      rules[rule]['memory'],
