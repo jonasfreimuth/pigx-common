@@ -331,6 +331,42 @@ def maybe_copy(source, target_dir):
 def prepare_links():
     os.makedirs(path.join(config['locations']['output-dir'], 'pigx_work'),
                 exist_ok=True)
+
+    # FIXME: special case for bsseq
+    if ["@PACKAGE_NAME@".lower()] == 'pigx_bsseq':
+        os.makedirs(path.join(config['locations']['output-dir'], 'pigx_work/input'),
+                    exist_ok=True)
+
+        # copy documentation file to the output work directory.
+        if os.getenv('PIGX_UNINSTALLED'):
+            where = os.getenv('srcdir') if os.getenv('srcdir') else '.'
+            contents = path.join(where, 'etc/CONTENTS.txt')
+        else:
+            contents = path.join(config['locations']['pkgdatadir'], 'CONTENTS.txt')
+        shutil.copyfile(contents, path.join(config['locations']['output-dir'], 'pigx_work/CONTENTS.txt'))
+
+        # Link the reference genome
+        try:
+            os.symlink(os.path.dirname(config['locations']['genome-fasta']),
+                       path.join(config['locations']['output-dir'], 'pigx_work/refGenome'))
+        except FileExistsError:
+            pass
+
+        # Create file links
+        for sample in config['SAMPLES']:
+            flist = config['SAMPLES'][sample]['files']
+            single_end = len(flist) == 1
+
+            for idx, f in enumerate(flist):
+                if not f.endswith(".gz"):
+                    # FIXME: Future versions should handle unzipped .fq or .bz2.
+                    bail("Input files must be gzipped: %s." % f)
+
+                tag = "" if single_end else '_' + str(idx + 1)
+                linkname = config['SAMPLES'][sample]['SampleID'] + tag + ".fq.gz"
+                makelink(path.join(config['locations']['input-dir'], f),
+                         path.join(config['locations']['output-dir'], "pigx_work/input/", linkname))
+
     # Ensure that we use the configured Pandoc, pandoc-citeproc
     # ...and the configured Rscript
     bin = path.join(config['locations']['output-dir'], 'pigx_work/bin')
