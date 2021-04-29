@@ -359,6 +359,7 @@ command = [
     "--configfile={}".format(args.configfile),
     "--directory={}".format(config['locations']['output-dir']),
     "--jobs={}".format(config['execution']['jobs']),
+    "--rerun-incomplete"
 ]
 
 if config['execution']['submit-to-cluster']:
@@ -408,7 +409,6 @@ if config['execution']['submit-to-cluster']:
 else:
     print("Commencing snakemake run submission locally", flush=True, file=sys.stderr)
 
-command.append("--rerun-incomplete")
 if args.graph:
     command.append("--dag")
     with open(args.graph, "w") as outfile:
