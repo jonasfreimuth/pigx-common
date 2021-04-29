@@ -223,7 +223,7 @@ settings.
     settings['execution']['target'] = args.target
 
     # FIXME: special case for scrnaseq: resolve genome fasta / gtf files
-    if ["@PACKAGE_NAME@".lower()] == 'pigx_scrnaseq':
+    if "@PACKAGE_NAME@".lower() == 'pigx_scrnaseq':
         for annotation in ['primary', 'secondary']:
             if settings['annotation'][annotation]:
                 if settings['annotation'][annotation]['gtf']:
@@ -238,7 +238,7 @@ settings.
 
     # FIXME: special case for bsseq:
     # Load parameters specific to samples
-    if ["@PACKAGE_NAME@".lower()] == 'pigx_bsseq':
+    if "@PACKAGE_NAME@".lower() == 'pigx_bsseq':
         with open(sample_sheet, 'r') as f:
             lines = f.read().splitlines()
         sample_params = parse_samples(lines)
@@ -335,7 +335,7 @@ def prepare_links():
                 exist_ok=True)
 
     # FIXME: special case for bsseq
-    if ["@PACKAGE_NAME@".lower()] == 'pigx_bsseq':
+    if "@PACKAGE_NAME@".lower() == 'pigx_bsseq':
         os.makedirs(path.join(config['locations']['output-dir'], 'pigx_work/input'),
                     exist_ok=True)
 
