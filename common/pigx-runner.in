@@ -221,6 +221,14 @@ settings.
         update_config(settings,yaml.safe_load(open(settingsfile, 'r')))
 
     settings['execution']['target'] = args.target
+    # FIXME: special case for bsseq:
+    # Load parameters specific to samples
+    if ["@PACKAGE_NAME@".lower()] == 'pigx_bsseq':
+        with open(sample_sheet, 'r') as f:
+            lines = f.read().splitlines()
+        sample_params = parse_samples(lines)
+        settings.update(sample_params)
+
     settings['locations'].update(dirs['locations'])
 
     # Resolve relative paths in the locations section
