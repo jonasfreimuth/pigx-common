@@ -230,6 +230,12 @@ settings.
                     settings['annotation'][annotation]['gtf'] = path.normpath(path.join(here, root, settings['annotation'][annotation]['gtf']))
                 if settings['annotation'][annotation]['genome'] and settings['annotation'][annotation]['genome']['fasta']:
                     settings['annotation'][annotation]['genome']['fasta'] = path.normpath(path.join(here, root, settings['annotation'][annotation]['genome']['fasta']))
+
+    # Record the location of the sample sheet.
+    if not os.path.isfile(path.abspath(sample_sheet)):
+        bail("ERROR: Failed to find sample sheet provided. No such file: " + sample_sheet)
+    settings['locations']['sample-sheet'] = path.abspath(sample_sheet)
+
     # FIXME: special case for bsseq:
     # Load parameters specific to samples
     if ["@PACKAGE_NAME@".lower()] == 'pigx_bsseq':
@@ -247,12 +253,6 @@ settings.
     for key in settings['locations']:
         if settings['locations'][key]:
             settings['locations'][key] = path.normpath(path.join(here, root, settings['locations'][key]))
-
-    # Record the location of the sample sheet.
-    if not os.path.isfile(path.abspath(sample_sheet)):
-      message = 'sample_sheet file not found'
-      sys.exit(message)
-    settings['locations']['sample-sheet'] = path.abspath(sample_sheet)
 
     # Write the config file
     with open(configfile, 'w') as outfile:
