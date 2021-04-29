@@ -31,75 +31,15 @@ if 'yes' == '@capture_environment@':
         except ValueError:
             sys.path.insert(1, directory)
 
-
-pipelines_meta = {
-    'pigx_bsseq': {
-        'version': """
-PiGx BSseq Pipeline.
-Version: @PACKAGE_VERSION@
-
-Copyright © 2017-2021 Alexander Gosdschan, Katarzyna Wreczycka, Bren Osberg, Ricardo Wurmus.
-""",
-        'description': """
-PiGx BSseq Pipeline.
-
-PiGx BSseq is a data processing pipeline for raw fastq read data of
-bisulfite experiments.  It produces methylation and coverage
-information and can be used to produce information on differential
-methylation and segmentation.
-"""
-    },
-    'pigx_rnaseq': {
-        'version': """
-PiGx RNAseq Pipeline.
-Version: @PACKAGE_VERSION@
-
-Copyright © 2017-2021 Bora Uyar, Jona Ronen, Ricardo Wurmus.
-""",
-        'description': """
-PiGx RNAseq Pipeline.
-
-PiGx RNAseq is a data processing pipeline for RNAseq read data.
-"""
-    },
-    'pigx_scrnaseq': {
-        'version': """
-PiGx scRNAseq Pipeline.
-Version: @PACKAGE_VERSION@
-
-Copyright © 2017-2021 Vedran Franke, Bora Uyar, Ricardo Wurmus.
-""",
-        'description': """
-PiGx scRNAseq Pipeline.
-
-PiGx scRNAseq is a data processing pipeline for single-cell RNAseq read data.
-"""
-    },
-    'pigx_chipseq': {
-        'version': """
-PiGx ChIPseq Pipeline.
-Version: @PACKAGE_VERSION@
-
-Copyright © 2017-2021 Vedran Franke, Alexander Gosdschan, Ricardo Wurmus.
-""",
-        'description': """
-PiGx ChIPseq Pipeline.
-
-PiGx ChIPseq is a data processing pipeline for ChIPseq read data.
-"""
-    }
-}
-
-license_blob = """
+license_blurb = """
 License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
 
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 """
 
-meta = pipelines_meta["@PACKAGE_NAME@".lower()]
-description = meta['description']
-version = meta['version'] + license_blob
+@PIPELINE_META@
+
 epilog = "This pipeline was developed by the Akalin group at MDC in Berlin in 2017-2021."
 
 
