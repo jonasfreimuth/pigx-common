@@ -8,6 +8,8 @@
 #
 # Change History
 # 08/06/2021 Alexander Blume    Update help message.
+#                               Add release and sign.
+#
 #
 #
 # This program is free software: you can redistribute it and/or modify
@@ -25,7 +27,7 @@
 
 
 
-VERSION="0.0.2"
+VERSION="0.0.3"
 DESCRIPTION="PiGx developer toolkit"
 
 usage() {
@@ -36,6 +38,8 @@ usage() {
   echo "    b|build     Initialise pipeline from git folder, running bootstrap and configure"
   echo "    c|clean     Remove test files"
   echo "    t|test      Run tests"
+  echo "    r|release   Create release"
+  echo "    s|sign      Sign tag and release"
   echo 
   echo "    -v|--version   Show toolkit version"
   echo "    -h|--help      Show this help"
@@ -59,6 +63,16 @@ test() {
     make check
 }
 
+release() {
+    # bundle release
+    make distcheck
+}
+
+sign() {
+    # sign the release
+    git tag --sign v$(cat VERSION)
+    gpg --detach-sign pigx_*-$(cat VERSION).tar.gz
+}
 
 default() {
   local OPTIND
@@ -84,6 +98,12 @@ case "$1" in
     ;;
   t|test)
     test
+    ;;
+  r|release)
+    release
+    ;;
+  s|sign)
+    sign
     ;;
   *)
     default "$@"
