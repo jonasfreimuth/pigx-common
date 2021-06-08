@@ -46,7 +46,6 @@ build() {
   	./bootstrap.sh
 	./configure --prefix=$PWD/local_install --disable-r-packages-check
 	make install
-	export PIGX_UNINSTALLED=1
 }
 
 clean() {
