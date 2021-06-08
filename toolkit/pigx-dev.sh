@@ -59,20 +59,6 @@ test() {
     make check
 }
 
-subcommand() {
-  local OPTIND
-  OPTIND=2
-  while getopts ":c:" opt; do
-    case "${opt}" in
-      c)
-        cl=${OPTARG}
-        echo "${cl}"
-        ;;
-    esac
-  done
-  shift $((OPTIND-1))
-}
-
 
 default() {
   local OPTIND
@@ -90,9 +76,6 @@ default() {
 
 
 case "$1" in
-  validate)
-    subcommand "$@"
-    ;;
   b|build)
     build
     ;;
