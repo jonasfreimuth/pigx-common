@@ -30,7 +30,7 @@ DESCRIPTION="PiGx developer toolkit"
 
 usage() {
    # display help message
-  echo "Usage: $0 [ subcommand [-c num] ] [-v]"
+  echo "Usage: $0 [ subcommand ] [-v]"
   echo
   echo "Available subcommands are:"
   echo "    b|build     Initialise pipeline from git folder, running bootstrap and configure"

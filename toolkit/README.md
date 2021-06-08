@@ -1,10 +1,12 @@
+# PiGx Developer Toolkit
+
 This is script is supposed to be a helper that aggregates commonly used commands.
 
 You may run this script from the base directory of your current pigx-pipeline git/source directory, 
 as it relies on the configure and make files beeing in the same directory.  
 
 ```
-Usage: ./pigx-dev.sh [ subcommand [-c num] ] [-v]
+Usage: ./pigx-dev.sh [ subcommand ] [-v]
 
 Available subcommands are:
     b|build     Initialise pipeline from git folder, running bootstrap and configure
@@ -14,3 +16,5 @@ Available subcommands are:
     -v|--version   Show toolkit version
     -h|--help      Show this help
 ```
+
+
