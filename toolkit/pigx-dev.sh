@@ -36,8 +36,9 @@ usage() {
   echo "    b|build     Initialise pipeline from git folder, running bootstrap and configure"
   echo "    c|clean     Remove test files"
   echo "    t|test      Run tests"
-  echo "    v|version   Show toolkit version"
-  echo "    h|help      Show this help"
+  echo 
+  echo "    -v|--version   Show toolkit version"
+  echo "    -h|--help      Show this help"
 }
 
 build() {
