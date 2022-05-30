@@ -222,7 +222,7 @@ settings.
     # Load user overrides
     if settingsfile:
         if not os.path.isfile(settingsfile):
-            bail('ERROR: settings.yaml file not found')
+            bail(f'ERROR: {settingsfile} file not found')
         update_config(settings,yaml.safe_load(open(settingsfile, 'r')))
 
     settings['execution']['target'] = args.target
