@@ -214,7 +214,8 @@ settings.
         defaults = path.join(dirs['locations']['pkgdatadir'], 'settings.yaml')
 
     if not path.exists(defaults):
-        bail("Could not find default settings.  Did you forget to set PIGX_UNINSTALLED?")
+        bail(f"Could not find default settings at {defaults}. Did you forget "
+                "to set PIGX_UNINSTALLED?")
 
     settings = yaml.safe_load(open(defaults, 'r'))
 
