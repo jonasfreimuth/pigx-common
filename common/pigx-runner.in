@@ -2,7 +2,7 @@
 # -*- python -*-
 # PiGx -- Pipelines in Genomics.
 #
-# Copyright © 2017-2021 Akalin lab.
+# Copyright © 2017-2022 Akalin lab.
 #
 # This file is part of PiGx.
 #
@@ -40,7 +40,7 @@ There is NO WARRANTY, to the extent permitted by law.
 
 @PIPELINE_META@
 
-epilog = "This pipeline was developed by the Akalin group at MDC in Berlin in 2017-2021."
+epilog = "This pipeline was developed by the Akalin group at MDC in Berlin in 2017-2022."
 
 
 import argparse
