@@ -542,7 +542,7 @@ else:
     print("Commencing snakemake run submission locally", flush=True, file=sys.stderr)
 
 if args.graph:
-    command.append("--dag")
+    command.append("--rulegraph")
     with open(args.graph, "w") as outfile:
         p1 = subprocess.Popen(command, stdout=subprocess.PIPE)
         p2 = subprocess.Popen(['dot','-Tpdf'], stdin=p1.stdout, stdout=outfile)
