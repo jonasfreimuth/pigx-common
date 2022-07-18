@@ -563,4 +563,6 @@ else:
         command = command + args.snakemake
     if args.target and 'help' in args.target:
         command.append("help")
-    subprocess.run(command)
+    command_exit = subprocess.run(command)
+
+    sys.exit(command_exit.returncode)
