@@ -173,7 +173,11 @@ settings.
 
     for key in settings['locations']:
         if settings['locations'][key]:
-            settings['locations'][key] = path.normpath(path.join(here, root, settings['locations'][key]))
+            settings['locations'][key] = path.normpath(
+                path.join(
+                    here,
+                    root,
+                    settings['locations'][key]))
 
     # FIXME: special case for scrnaseq: resolve genome fasta / gtf files
     if "@PACKAGE_NAME@".lower() == 'pigx_scrnaseq':
