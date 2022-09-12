@@ -177,7 +177,7 @@ settings.
                 path.join(
                     here,
                     root,
-                    settings['locations'][key]))
+                    path.expanduser(settings['locations'][key])))
 
     # FIXME: special case for scrnaseq: resolve genome fasta / gtf files
     if "@PACKAGE_NAME@".lower() == 'pigx_scrnaseq':
