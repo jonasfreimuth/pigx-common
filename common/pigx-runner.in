@@ -92,9 +92,16 @@ pipeline.""")
 
 parser.add_argument('--graph', dest='graph',
                     help="""\
+Output a graph in PDF format showing the exact flow of individual rule
+instances, i.e. one element per execution of a rule. Warning: This can become
+cluttered very fast; see --rulegraph for a graph with just one node per rule.
+You must specify a graph file name such as "graph.pdf".""")
+
+parser.add_argument('--rulegraph', dest='rulegraph',
+                    help="""\
 Output a graph in PDF format showing the relations between rules of
-this pipeline.  You must specify a graph file name such as
-"graph.pdf".""")
+this pipeline (see snakemake option "--rulegraph"). You must specify a graph
+file name such as "graph.pdf".""")
 
 parser.add_argument('--force', dest='force', action='store_true',
                     help="""\
@@ -434,9 +441,16 @@ if config['execution']['submit-to-cluster']:
 else:
     print("Commencing snakemake run submission locally", flush=True, file=sys.stderr)
 
-if args.graph:
-    command.append("--dag")
-    with open(args.graph, "w") as outfile:
+if args.graph or args.rulegraph:
+    if args.graph:
+        command.append("--dag")
+        graph_out = args.graph
+
+    elif args.rulegraph:
+        command.append("--rulegraph")
+        graph_out = args.rulegraph
+
+    with open(graph_out, "w") as outfile:
         p1 = subprocess.Popen(command, stdout=subprocess.PIPE)
         p2 = subprocess.Popen(['dot','-Tpdf'], stdin=p1.stdout, stdout=outfile)
         p2.communicate()
